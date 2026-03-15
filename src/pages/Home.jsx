@@ -38,6 +38,26 @@ const PadelIcon = ({ className }) => (
   </svg>
 )
 
+const TennisIcon = ({ className }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="12" r="10"/>
+    <path d="M12 2c-2.5 2.5-4 6-4 10s1.5 7.5 4 10"/>
+    <path d="M12 2c2.5 2.5 4 6 4 10s-1.5 7.5-4 10"/>
+    <path d="M2 12h20"/>
+  </svg>
+)
+
+const SoccerIcon = ({ className }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="12" r="10"/>
+    <path d="M12 2l2 4-2 2-2-2 2-4z"/>
+    <path d="M22 12l-4 2-2-2 2-2 4 2z"/>
+    <path d="M12 22l-2-4 2-2 2 2-2 4z"/>
+    <path d="M2 12l4-2 2 2-2 2-4-2z"/>
+    <path d="M12 8l2 2v4l-2 2-2-2v-4l2-2z"/>
+  </svg>
+)
+
 export default function Home() {
   const { currentUser } = useAuth()
   const [scrollY, setScrollY] = useState(0)
@@ -69,7 +89,7 @@ export default function Home() {
   const sports = [
     {
       icon: BasketballIcon,
-      name: 'Basketball',
+      name: 'Baloncesto',
       courts: 4,
       description: 'Canchas profesionales con tableros reglamentarios',
       gradient: 'from-orange-500 to-amber-500',
@@ -86,13 +106,40 @@ export default function Home() {
       textColor: 'text-blue-600'
     },
     {
+      icon: TennisIcon,
+      name: 'Tenis',
+      courts: 2,
+      description: 'Canchas reglamentarias con superficie apta para competencia',
+      gradient: 'from-yellow-500 to-lime-500',
+      bgLight: 'bg-yellow-50',
+      textColor: 'text-yellow-600'
+    },
+    {
       icon: PadelIcon,
       name: 'Pádel',
       courts: 1,
-      description: 'Cancha cerrada con cristales y césped artificial',
+      description: 'Cancha cerrada con cristales y piso de cemento',
       gradient: 'from-emerald-500 to-teal-500',
       bgLight: 'bg-emerald-50',
       textColor: 'text-emerald-600'
+    },
+    {
+      icon: SoccerIcon,
+      name: 'Fútbol Soccer',
+      courts: 1,
+      description: 'Cancha de fútbol soccer con césped artificial',
+      gradient: 'from-green-500 to-emerald-600',
+      bgLight: 'bg-green-50',
+      textColor: 'text-green-600'
+    },
+    {
+      icon: SoccerIcon,
+      name: 'Fútbol Rápido',
+      courts: 1,
+      description: 'Cancha de fútbol rápido, ideal para partidos ágiles',
+      gradient: 'from-lime-500 to-green-500',
+      bgLight: 'bg-lime-50',
+      textColor: 'text-lime-700'
     },
   ]
 
@@ -240,7 +287,7 @@ export default function Home() {
                 className="text-lg sm:text-xl text-gray-500 leading-relaxed mb-10 max-w-md opacity-0"
                 style={{ animation: 'fadeSlideUp 0.6s ease-out 0.3s forwards' }}
               >
-                La forma más rápida y segura de encontrar y reservar canchas de fútbol. Sin complicaciones, sin esperas.
+                La forma más rápida y segura de encontrar canchas para reservar en la unidad deportiva sin complicaciones ni esperas.
               </p>
 
               {/* CTA Buttons */}
@@ -304,60 +351,10 @@ export default function Home() {
               }}
             >
               <div className="relative w-full max-w-lg lg:max-w-xl aspect-square">
-                {/* Decorative ring */}
-                <div 
-                  className="absolute inset-0 rounded-full border border-emerald-100 opacity-50"
-                  style={{ transform: `scale(${1 + scrollY * 0.0002})` }}
-                />
-                <div 
-                  className="absolute inset-4 rounded-full border border-emerald-50 opacity-30"
-                  style={{ transform: `scale(${1 + scrollY * 0.0001}) rotate(${scrollY * 0.02}deg)` }}
-                />
-                
-                {/* Motion lines - left side */}
-                <div className="absolute top-1/4 -left-4 w-16 opacity-40 hidden sm:block">
-                  <div className="h-0.5 bg-emerald-400 rounded mb-3" style={{ width: '100%', animation: 'motionLine 2s ease-in-out infinite' }} />
-                  <div className="h-0.5 bg-emerald-300 rounded mb-3" style={{ width: '75%', animation: 'motionLine 2s ease-in-out infinite', animationDelay: '0.3s' }} />
-                  <div className="h-0.5 bg-emerald-400 rounded" style={{ width: '50%', animation: 'motionLine 2s ease-in-out infinite', animationDelay: '0.6s' }} />
-                </div>
-                
-                {/* Motion lines - right side */}
-                <div className="absolute top-1/3 -right-4 w-16 opacity-40 hidden sm:block">
-                  <div className="h-0.5 bg-emerald-400 rounded mb-3 ml-auto" style={{ width: '50%', animation: 'motionLine 2s ease-in-out infinite', animationDelay: '0.2s' }} />
-                  <div className="h-0.5 bg-emerald-300 rounded mb-3 ml-auto" style={{ width: '75%', animation: 'motionLine 2s ease-in-out infinite', animationDelay: '0.5s' }} />
-                  <div className="h-0.5 bg-emerald-400 rounded ml-auto" style={{ width: '100%', animation: 'motionLine 2s ease-in-out infinite', animationDelay: '0.8s' }} />
-                </div>
-                
-                {/* Main illustration container */}
-                <div className="relative w-full h-full flex items-center justify-center">
-                  <img 
-                    src={soccerImage} 
-                    alt="Soccer players illustration"
-                    className="w-full h-full object-contain drop-shadow-xl"
-                    style={{ 
-                      transform: `translateY(${scrollY * 0.03}px)`,
-                      animation: 'floatImage 4s ease-in-out infinite',
-                      willChange: 'transform',
-                    }}
-                  />
-                </div>
-                
-                {/* Decorative floating dots */}
-                <div 
-                  className="absolute -top-2 right-1/4 w-4 h-4 bg-emerald-200 rounded-full opacity-60"
-                  style={{ animation: 'floatDot 3s ease-in-out infinite' }}
-                />
-                <div 
-                  className="absolute bottom-1/4 -left-2 w-3 h-3 bg-violet-200 rounded-full opacity-50"
-                  style={{ animation: 'floatDot 3.5s ease-in-out infinite', animationDelay: '1s' }}
-                />
-                <div 
-                  className="absolute top-1/2 -right-3 w-2 h-2 bg-emerald-300 rounded-full opacity-40"
-                  style={{ animation: 'floatDot 2.5s ease-in-out infinite', animationDelay: '0.5s' }}
-                />
-                <div 
-                  className="absolute bottom-1/3 right-0 w-3 h-3 bg-emerald-100 rounded-full opacity-50"
-                  style={{ animation: 'floatDot 4s ease-in-out infinite', animationDelay: '1.5s' }}
+                <img
+                  src={soccerImage}
+                  alt="Logo"
+                  className="w-full h-full object-contain drop-shadow-xl"
                 />
               </div>
             </div>
@@ -379,7 +376,7 @@ export default function Home() {
       </section>
 
       {/* ====== SPORTS SECTION - Deportes Disponibles ====== */}
-      <section className="w-full py-20 lg:py-28 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
+      <section className="w-full py-20 lg:py-28 px-4 sm:px-6 lg:px-8 bg-linear-to-b from-gray-50 to-white relative overflow-hidden">
         {/* Background decoration */}
         <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-50 rounded-full blur-3xl opacity-50 -mr-48 -mt-48" />
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-emerald-50 rounded-full blur-3xl opacity-30 -ml-48 -mb-48" />
@@ -399,7 +396,7 @@ export default function Home() {
           </div>
 
           {/* Sports Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 lg:gap-8">
             {sports.map((sport, index) => {
               const Icon = sport.icon
               return (
@@ -409,7 +406,7 @@ export default function Home() {
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
                   {/* Background gradient on hover */}
-                  <div className={`absolute inset-0 bg-gradient-to-br ${sport.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500`} />
+                  <div className={`absolute inset-0 bg-linear-to-br ${sport.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500`} />
                   
                   {/* Icon */}
                   <div className={`relative w-20 h-20 ${sport.bgLight} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
@@ -427,14 +424,14 @@ export default function Home() {
                   {/* Courts count */}
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                      <span className={`text-3xl font-bold bg-gradient-to-r ${sport.gradient} bg-clip-text text-transparent`}>
+                      <span className={`text-3xl font-bold bg-linear-to-r ${sport.gradient} bg-clip-text text-transparent`}>
                         {sport.courts}
                       </span>
                       <span className="text-gray-500 text-sm">
                         {sport.courts === 1 ? 'cancha disponible' : 'canchas disponibles'}
                       </span>
                     </div>
-                    <div className={`w-10 h-10 rounded-full ${sport.bgLight} flex items-center justify-center group-hover:bg-gradient-to-r group-hover:${sport.gradient} transition-all duration-300`}>
+                    <div className={`w-10 h-10 rounded-full ${sport.bgLight} flex items-center justify-center group-hover:bg-linear-to-r group-hover:${sport.gradient} transition-all duration-300`}>
                       <ChevronRight className={`w-5 h-5 ${sport.textColor} group-hover:text-white transition-colors`} />
                     </div>
                   </div>
@@ -475,7 +472,7 @@ export default function Home() {
           {/* Steps Timeline */}
           <div className="relative">
             {/* Connection Line (Desktop) */}
-            <div className="hidden lg:block absolute top-24 left-0 right-0 h-0.5 bg-gradient-to-r from-emerald-200 via-emerald-400 to-emerald-200" />
+            <div className="hidden lg:block absolute top-24 left-0 right-0 h-0.5 bg-linear-to-r from-emerald-200 via-emerald-400 to-emerald-200" />
             
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6">
               {steps.map((step, index) => {
@@ -585,7 +582,7 @@ export default function Home() {
       {/* ====== TESTIMONIALS SECTION ====== */}
       <section className="w-full py-20 lg:py-28 px-4 sm:px-6 lg:px-8 bg-white relative overflow-hidden">
         {/* Background */}
-        <div className="absolute inset-0 bg-gradient-to-b from-emerald-50/50 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-b from-emerald-50/50 to-transparent" />
         
         <div className="max-w-7xl mx-auto relative">
           {/* Section Header */}
@@ -597,7 +594,7 @@ export default function Home() {
               Lo que dicen nuestros usuarios
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Miles de deportistas ya confían en ixmisport para sus reservas
+              Deportistas de la unidad ya confían en ixmisport para sus reservas
             </p>
           </div>
 
@@ -623,7 +620,7 @@ export default function Home() {
 
                 {/* Author */}
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-full flex items-center justify-center text-white font-bold">
+                  <div className="w-12 h-12 bg-linear-to-br from-emerald-400 to-emerald-600 rounded-full flex items-center justify-center text-white font-bold">
                     {testimonial.avatar}
                   </div>
                   <div>
@@ -638,9 +635,9 @@ export default function Home() {
           {/* Stats */}
           <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 animate-fadeInUp" style={{ animationDelay: '400ms' }}>
             {[
-              { value: '7', label: 'Canchas disponibles' },
-              { value: '500+', label: 'Reservas realizadas' },
-              { value: '98%', label: 'Usuarios satisfechos' },
+              { value: '11', label: 'Canchas disponibles' },
+              { value: 'Gratis', label: 'Uso de la plataforma' },
+              { value: '6', label: 'Deportes disponibles' },
               { value: '5★', label: 'Calificación promedio' },
             ].map((stat, index) => (
               <div key={index} className="text-center p-6 bg-white rounded-2xl border border-gray-100">
@@ -659,7 +656,7 @@ export default function Home() {
       {/* ====== FINAL CTA SECTION ====== */}
       <section className="w-full py-20 lg:py-28 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
         {/* Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-emerald-600 via-emerald-500 to-teal-500" />
+        <div className="absolute inset-0 bg-linear-to-br from-emerald-600 via-emerald-500 to-teal-500" />
         
         {/* Decorative elements */}
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">

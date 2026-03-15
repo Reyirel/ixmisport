@@ -9,7 +9,6 @@ import Perfil from './pages/Perfil'
 import CanchasReservar from './pages/CanchasReservar'
 import { AuthProvider, useAuth } from './context/AuthContext'
 import { initializeCanchas } from './services/firestoreService'
-import { createAdminUser } from './utils/initializeAdmin'
 
 function ProtectedRoute({ children }) {
   const { currentUser, loading } = useAuth()
@@ -54,10 +53,6 @@ function AppContent() {
     // Inicializar datos al cargar la app
     initializeCanchas()
     
-    // 🔒 SEGURIDAD: Solo inicializar admin en desarrollo
-    if (import.meta.env.MODE === 'development') {
-      createAdminUser()
-    }
   }, [])
 
   return (

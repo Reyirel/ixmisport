@@ -122,6 +122,15 @@ const SoccerIcon = ({ className }) => (
   </svg>
 )
 
+const TennisIcon = ({ className }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="12" r="10"/>
+    <path d="M12 2c-2.5 2.5-4 6-4 10s1.5 7.5 4 10"/>
+    <path d="M12 2c2.5 2.5 4 6 4 10s-1.5 7.5-4 10"/>
+    <path d="M2 12h20"/>
+  </svg>
+)
+
 export default function CanchasReservar() {
   const { currentUser, userData } = useAuth()
   const [canchas, setCanchas] = useState([])
@@ -151,7 +160,7 @@ export default function CanchasReservar() {
       setLoading(true)
       const data = await getAllCanchas()
       const sorted = data.sort((a, b) => {
-        const deporteOrder = { 'Basquetbol': 1, 'Voleibol': 2, 'Pádel': 3, 'Fútbol': 4 }
+        const deporteOrder = { 'Basquetbol': 1, 'Voleibol': 2, 'Tenis': 3, 'Pádel': 4, 'Fútbol Soccer': 5, 'Fútbol Rápido': 6, 'Fútbol': 5 }
         const orderA = deporteOrder[a.deporte] || 99
         const orderB = deporteOrder[b.deporte] || 99
         if (orderA !== orderB) return orderA - orderB
@@ -365,6 +374,9 @@ export default function CanchasReservar() {
       case 'Basquetbol': return <BasketballIcon className={className} />
       case 'Voleibol': return <VolleyballIcon className={className} />
       case 'Pádel': return <PadelIcon className={className} />
+      case 'Tenis': return <TennisIcon className={className} />
+      case 'Fútbol Soccer': return <SoccerIcon className={className} />
+      case 'Fútbol Rápido': return <SoccerIcon className={className} />
       case 'Fútbol': return <SoccerIcon className={className} />
       default: return <Activity className={className} />
     }
@@ -375,6 +387,9 @@ export default function CanchasReservar() {
       case 'Basquetbol': return { bg: 'bg-orange-100', text: 'text-orange-600', border: 'border-orange-200' }
       case 'Voleibol': return { bg: 'bg-blue-100', text: 'text-blue-600', border: 'border-blue-200' }
       case 'Pádel': return { bg: 'bg-emerald-100', text: 'text-emerald-600', border: 'border-emerald-200' }
+      case 'Tenis': return { bg: 'bg-yellow-100', text: 'text-yellow-600', border: 'border-yellow-200' }
+      case 'Fútbol Soccer': return { bg: 'bg-green-100', text: 'text-green-600', border: 'border-green-200' }
+      case 'Fútbol Rápido': return { bg: 'bg-lime-100', text: 'text-lime-700', border: 'border-lime-200' }
       case 'Fútbol': return { bg: 'bg-green-100', text: 'text-green-600', border: 'border-green-200' }
       default: return { bg: 'bg-gray-100', text: 'text-gray-600', border: 'border-gray-200' }
     }
@@ -625,7 +640,7 @@ export default function CanchasReservar() {
                               <div className="flex items-center gap-3 mt-1 text-sm text-gray-500">
                                 <span className="flex items-center gap-1">
                                   <Calendar className="w-3.5 h-3.5" />
-                                  {reserva.fecha}
+                                  {reserva.fecha ? reserva.fecha.split('-').reverse().join('/') : ''}
                                 </span>
                                 <span className="flex items-center gap-1">
                                   <Clock className="w-3.5 h-3.5" />

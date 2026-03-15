@@ -131,72 +131,8 @@ export const checkNoShow = async (reservaId) => {
 
 // ============ CANCHAS ============
 
-// Configuración de canchas del sistema (9 canchas en total)
-const CANCHAS_CONFIG = [
-  // Basquetbol (4 canchas - mínimo 4 jugadores)
-  { nombre: 'Cancha 1 - Basquetbol', deporte: 'Basquetbol', precio: 0, personasMinimas: 4, inhabilitada: false, orden: 1 },
-  { nombre: 'Cancha 2 - Basquetbol', deporte: 'Basquetbol', precio: 0, personasMinimas: 4, inhabilitada: false, orden: 2 },
-  { nombre: 'Cancha 3 - Basquetbol', deporte: 'Basquetbol', precio: 0, personasMinimas: 4, inhabilitada: false, orden: 3 },
-  { nombre: 'Cancha 4 - Basquetbol', deporte: 'Basquetbol', precio: 0, personasMinimas: 4, inhabilitada: false, orden: 4 },
-  // Voleibol (2 canchas - mínimo 6 jugadores)
-  { nombre: 'Cancha 1 - Voleibol', deporte: 'Voleibol', precio: 0, personasMinimas: 6, inhabilitada: false, orden: 5 },
-  { nombre: 'Cancha 2 - Voleibol', deporte: 'Voleibol', precio: 0, personasMinimas: 6, inhabilitada: false, orden: 6 },
-  // Pádel (1 cancha - mínimo 2 jugadores)
-  { nombre: 'Cancha 1 - Pádel', deporte: 'Pádel', precio: 0, personasMinimas: 2, inhabilitada: false, orden: 7 },
-  // Fútbol (2 canchas - mínimo 10 jugadores)
-  { nombre: 'Cancha 1 - Fútbol', deporte: 'Fútbol', precio: 0, personasMinimas: 10, inhabilitada: false, orden: 8 },
-  { nombre: 'Cancha 2 - Fútbol', deporte: 'Fútbol', precio: 0, personasMinimas: 10, inhabilitada: false, orden: 9 },
-]
-
-// Flag para evitar inicialización múltiple
-let canchasInitialized = false
-let canchasInitializing = false
-
-// Crear canchas iniciales (solo una vez)
-export const initializeCanchas = async () => {
-  // Evitar ejecución múltiple
-  if (canchasInitialized || canchasInitializing) {
-    return
-  }
-  
-  canchasInitializing = true
-  
-  try {
-    // Verificar canchas existentes
-    const existingCanchas = await getAllCanchas()
-    
-    // Verificar si ya están las 9 canchas correctas por nombre
-    const nombresExistentes = existingCanchas.map(c => c.nombre)
-    const nombresEsperados = CANCHAS_CONFIG.map(c => c.nombre)
-    const todasExisten = nombresEsperados.every(nombre => nombresExistentes.includes(nombre))
-    
-    if (todasExisten && existingCanchas.length === CANCHAS_CONFIG.length) {
-      console.log('✅ Canchas ya configuradas correctamente (9 canchas)')
-      canchasInitialized = true
-      canchasInitializing = false
-      return
-    }
-    
-    console.log(`Reinicializando canchas: encontradas ${existingCanchas.length}, esperadas ${CANCHAS_CONFIG.length}`)
-    
-    // Eliminar TODAS las canchas existentes
-    for (const cancha of existingCanchas) {
-      await deleteCancha(cancha.id)
-    }
-    
-    // Crear las 9 canchas correctas
-    for (const cancha of CANCHAS_CONFIG) {
-      await addCancha(cancha)
-    }
-    
-    console.log('✅ 9 Canchas inicializadas: 4 Basquetbol, 2 Voleibol, 1 Pádel, 2 Fútbol')
-    canchasInitialized = true
-  } catch (error) {
-    console.error('Error inicializando canchas:', error)
-  } finally {
-    canchasInitializing = false
-  }
-}
+// Las canchas son gestionadas exclusivamente por el administrador desde el panel
+export const initializeCanchas = async () => {}
 
 // Agregar una cancha
 export const addCancha = async (chanchaData) => {
